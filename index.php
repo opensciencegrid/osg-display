@@ -1,6 +1,8 @@
 <?php
 require_once("site_config.php");
-$json = file_get_contents("osg_display/display.json");
+$json_file = "osg_display/display.json";
+$json_time = filemtime($json_file);
+$json = file_get_contents($json_file);
 $json = str_replace("'", "\"", $json);
 $info = json_decode($json, true);
 
@@ -24,7 +26,7 @@ function format($num) {
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap-default/css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
 html {
 height: 100%;
@@ -35,19 +37,16 @@ height: 100%;
 font-size: 15pt;
 }
 .container-fluid {
-padding-top: 65px;
+padding-top: 75px;
 height: 100%;
 box-sizing: border-box;
 padding-bottom: 80px;
 }
-.navbar-inner .content {
-height: 60px;
-}
 .navbar-inner img.logo {
-margin-top: 5px
+padding: 10px 0px;
 }
 .navbar-inner .title {
-padding-top: 20px;
+padding-top: 25px;
 text-align: right;
 color: #666;
 }
@@ -74,13 +73,19 @@ margin: 0px auto;
 display: block;
 margin-bottom: 10px;
 }
-.table th.head {
-background-color: #eee;
+.stats {
+margin-top: 37px;
+font-size: 90%;
 }
-table.stats td.stat-value {
+.stats th.head {
+background-color: #555;
+box-shadow:0px 0px 10px #333 inset;
+color: white;
+}
+.stats td.stat-value {
 text-align: right;
 }
-table.stats td.stat-label {
+.stats td.stat-label {
 color: #999;
 }
 .footer {
@@ -247,7 +252,9 @@ text-align: center;
 </div> <!-- span -->
 
 <div class="span3">
-    <table class="table stats">
+    <div class="stats well">
+    <p>OSG delivered across <?php echo $info["num_sites"];?> sites</p>
+    <table class="table">
     <tr><th colspan="2" class="head">In the last 24 Hours</th></tr>
     <tr><td class="stat-value"><?php echo format($info["jobs_hourly"]);?></td><td class="stat-label">Jobs</td></tr>
     <tr><td class="stat-value"><?php echo format($info["cpu_hours_hourly"]);?></td><td class="stat-label">CPU&nbsp;Hours</td></tr>
@@ -264,6 +271,7 @@ text-align: center;
     <tr><td class="stat-value"><?php echo format($info["transfers_monthly"]);?></td><td class="stat-label">Transfers</td></tr>
     <tr><td class="stat-value"><?php echo format($info["transfer_volume_mb_monthly"]/1000000);?></td><td class="stat-label">TB&nbsp;Transfers</td></tr>
     </table>
+    </div><!--well-->
 </div> <!--span-->
 
 </div> <!--row-->
@@ -275,7 +283,7 @@ text-align: center;
     <img src="doe.png">
 </div>
 <div class="span4">
-<p class="status-at">Status at 3:30PM</p>
+<p class="status-at">Status at <time class="timeago" datetime="<?php echo date("cZ", $json_time);?>"><?php echo date("cZ", $json_time);?></time></p>
 <p class="note">
     Data is loaded every <a href='https://twiki.grid.iu.edu/twiki/pub/Accounting/WebHome/2009_08_20_Gratia_buffering.pdf' target='_blank'>15 minutes</a>
 </p>
@@ -287,8 +295,10 @@ text-align: center;
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="jquery.timeago.js"></script>
 <script>
 $(function() {
+    updateTimeago();
     $('.carousel').carousel().bind("slide", function(e) {
         var tabid = $(e.relatedTarget).data("tabid");
         $("#"+tabid).tab("show");
@@ -311,7 +321,9 @@ $(function() {
     $("#tab-tb").click(function() {
         $(".carousel").carousel(10);
     })
+
 });
+
 function set_itemheight() {
     var wh = $(".container-fluid").height();
     var ch = $(".active .carousel-caption").height();
@@ -319,6 +331,12 @@ function set_itemheight() {
     $(".item iframe").height(wh-ch-fh+10);//img has margin-bottom 10px
     $(".item img").height(wh-ch-fh);
 }
+
+function updateTimeago() {
+    $("time.timeago").timeago();
+    setTimeout(updateTimeago, 30*1000);
+}
+
 </script>
 </body>
 </html>
