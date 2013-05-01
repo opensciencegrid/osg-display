@@ -37,16 +37,17 @@ height: 100%;
 font-size: 15pt;
 }
 .container-fluid {
-padding-top: 75px;
+padding-top: 65px;
 height: 100%;
 box-sizing: border-box;
 padding-bottom: 80px;
 }
 .navbar-inner img.logo {
-padding: 10px 0px;
+padding: 5px 0px;
+height: 50px;
 }
 .navbar-inner .title {
-padding-top: 25px;
+padding-top: 20px;
 text-align: right;
 color: #666;
 }
@@ -74,8 +75,7 @@ display: block;
 margin-bottom: 10px;
 }
 .stats {
-margin-top: 37px;
-font-size: 90%;
+margin-top: 15px;
 }
 .stats th.head {
 background-color: #555;
@@ -330,6 +330,10 @@ function set_itemheight() {
     var fh = $(".footer").height();
     $(".item iframe").height(wh-ch-fh+10);//img has margin-bottom 10px
     $(".item img").height(wh-ch-fh);
+
+    //var fsize = wh/40;
+    //console.log(fsize);
+    //$(".stats").css("font-size", fsize);
 }
 
 function updateTimeago() {
