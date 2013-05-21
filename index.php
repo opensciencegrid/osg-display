@@ -12,6 +12,22 @@ function format($num) {
     }
     return number_format($num);
 }
+
+function render_selector($active, $first_tid) {
+    switch($active) {
+    case "24h": $active_24h = "active"; break;
+    case "30d": $active_30d = "active"; break;
+    case "12m": $active_12m = "active"; break;
+    }
+    ?>
+    <ul class="nav nav-pills pull-right time-selector-area">
+      <li class="<?php echo $active_24h;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid;?>">24 Hours</a></li>
+      <li class="<?php echo $active_30d;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid+1;?>">30 Days</a></li>
+      <li class="<?php echo $active_12m;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid+2;?>">12 Month</a></li>
+    </ul>
+    <?php
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +53,21 @@ body {
 position: relative;
 height: 100%;
 font-size: 14pt;
+background-color: #155797;
+}
+.navbar-fixed-top {
+border-bottom: 5px solid orange;
 }
 .stats {
 position: absolute;
-top: 65px;
-right: 10px;
-margin-top: 10px;
-border-left: 20px solid white;
+top: 75px;
+right: 15px;
 width: 300px;
+}
+.stats .well {
+background-color: white;
+padding: 8px 0; 
+margin-bottom: 0;
 }
 .stats-title {
 padding-top: 10px;
@@ -52,15 +75,43 @@ padding-left: 10px;
 padding-right: 10px;
 font-size: 90%;
 text-align: center;
+color: white;
+}
+.stats .head a {
+color: #333;
+font-weight: bold;
+font-size: 95%;
+}
+.stats .head {
+background-color: #ccc;
+}
+.stats li {
+padding-left: 10px;
+border-bottom: 1px solid #eee;
+}
+.stats li.head {
+}
+.stats .nav-list {
+padding: 0px;
+}
+.time-selector-area {
+position: absolute; 
+right: 0;
+float: right;
+background-color: white;
+padding: 0px 0px 5px 15px;
+}
+.content-out {
+background-color: white;
+margin-right: 310px;
 }
 .content {
-margin-right: 310px;
 }
 ul.menu {
 margin-bottom: 10px;
 }
 .container-fluid {
-padding-top: 65px;
+padding-top: 75px;
 height: 100%;
 box-sizing: border-box;
 padding-bottom: 80px;
@@ -87,9 +138,11 @@ margin-bottom: 3px;
 }
 .caption {
 color: #666;
+display: none;
 }
 .carousel .item iframe {
 width: 100%;
+height: 100%;
 }
 .carousel .item > img {
 margin: 0px auto;
@@ -102,20 +155,17 @@ padding: 2px 10px;
 margin: 1px;
 margin-right: 10px;
 text-align: right;
-/*
-border: 1px solid #ccc;
 border-radius: 2px;
-*/
+font-weight: bold;
+/*
 box-sizing: border-box;
+text-shadow: 1px 1px 2px white;
+*/
 }
 .stats .stat-label {
 font-size: 80%;
 color: #666;
 font-weight: bold;
-}
-.stats li.active {
-margin-top: 5px;
-text-align: center;
 }
 .footer {
 width: 100%;
@@ -125,6 +175,7 @@ position: absolute;
 bottom: 0px;
 display: block;
 box-shadow:0px 0px 10px #000 inset;
+border-top: 5px solid orange;
 }
 .footer img {
 padding: 5px;
@@ -167,6 +218,8 @@ display: block;
 
 <div class="container-fluid">
 
+<div class="content-out well well-small">
+
 <ul class="nav nav-tabs menu">
   <li class="active"><a id="tab-statusmap" href="#home" data-toggle="tab">Status Map</a></li>
   <li><a id="tab-job" href="#home" data-toggle="tab">Jobs</a></li>
@@ -176,26 +229,26 @@ display: block;
 </ul>
 
 <div class="stats">
-        <div class="well" style="padding: 8px 0; margin-bottom: 0;">
+        <div class="well">
         <ul class="nav nav-list">
-            <li class="active"><a href="#">In the last 24 Hours</a></li>
+            <li class="head"><a href="#">In the last 24 Hours</a></li>
             <li><span class="stat-value"><?php echo format($info["jobs_hourly"]);?></span><span class="stat-label">Jobs</span></li>
             <li><span class="stat-value"><?php echo format($info["cpu_hours_hourly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
             <li><span class="stat-value"><?php echo format($info["transfers_hourly"]);?></span><span class="stat-label">Transfers</span></li>
             <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_hourly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
-            <li class="active"><a href="#">In the last 30 Days</a></li>
+            <li class="head"><a href="#">In the last 30 Days</a></li>
             <li><span class="stat-value"><?php echo format($info["jobs_daily"]);?></span><span class="stat-label">Jobs</span></li>
             <li><span class="stat-value"><?php echo format($info["cpu_hours_daily"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
             <li><span class="stat-value"><?php echo format($info["transfers_daily"]);?></span><span class="stat-label">Transfers</span></li>
             <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_daily"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
-            <li class="active"><a href="#">In the last 12 Month</a></li>
+            <li class="head"><a href="#">In the last 12 Month</a></li>
             <li><span class="stat-value"><?php echo format($info["jobs_monthly"]);?></span><span class="stat-label">Jobs</span></li>
             <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
             <li><span class="stat-value"><?php echo format($info["transfers_monthly"]);?></span><span class="stat-label">Transfers</span></li>
             <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_monthly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
         </ul>
         </div>
-        <p class="muted stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
+        <p class="stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
 </div> <!--stats-->
 
 <div class="content">
@@ -216,53 +269,65 @@ display: block;
           </div>
 
           <div class="item" data-tabid="tab-job">
+            <?php render_selector("24h", 1)?>
             <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
             <img src="osg_display/jobs_hourly.png"></img>
           </div>
           <div class="item" data-tabid="tab-job">
+            <?php render_selector("30d", 1)?>
             <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
             <img src="osg_display/jobs_daily.png" alt="">
           </div>
           <div class="item" data-tabid="tab-job">
+            <?php render_selector("12m", 1)?>
             <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
             <img src="osg_display/jobs_monthly.png" alt="">
           </div>
 
           <div class="item" data-tabid="tab-cpu">
+            <?php render_selector("24h", 4)?>
             <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/cpu_hours_hourly.png" alt="">
           </div>
           <div class="item" data-tabid="tab-cpu">
+            <?php render_selector("30d", 4)?>
             <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/cpu_hours_daily.png" alt="">
           </div>
           <div class="item" data-tabid="tab-cpu">
+            <?php render_selector("12m", 4)?>
             <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/cpu_hours_monthly.png" alt="">
           </div>
 
           <div class="item" data-tabid="tab-transfer">
+            <?php render_selector("24h", 7)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfers_hourly.png" alt="">
           </div>
           <div class="item" data-tabid="tab-transfer">
+            <?php render_selector("30d", 7)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfers_daily.png" alt="">
           </div>
           <div class="item" data-tabid="tab-transfer">
+            <?php render_selector("12m", 7)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfers_monthly.png" alt="">
           </div>
 
           <div class="item" data-tabid="tab-tb">
+            <?php render_selector("24h", 10)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfer_volume_hourly.png" alt="">
           </div>
           <div class="item" data-tabid="tab-tb">
+            <?php render_selector("30d", 10)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfer_volume_daily.png" alt="">
           </div>
           <div class="item" data-tabid="tab-tb">
+            <?php render_selector("12m", 10)?>
             <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
             <img src="osg_display/transfer_volume_monthly.png" alt="">
           </div>
@@ -273,6 +338,7 @@ display: block;
     </div><!--osgCarousel-->
 </div> <!--content-->
 
+</div><!--content-out-->
 </div><!--container-fluid-->
 
 <div class="footer">
@@ -322,11 +388,16 @@ $(function() {
     $("#tab-tb").click(function() {
         $(".carousel").carousel(10);
     })
+    $(".time-selector").click(function() {
+        var tid = $(this).data("tid");
+        $(".carousel").carousel(tid);
+        return false;
+    });
 
 });
 
 function onresize() {
-    var h = $(window).height() - 240;
+    var h = $(window).height() - 310;
     $(".item iframe").each(function() {
         $(this).height(h);
     });
