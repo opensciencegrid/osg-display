@@ -1,2 +1,3 @@
-osg_display
+osg_display/*.png
+osg_display/*.svg
 site_config.php
