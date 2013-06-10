@@ -58,12 +58,14 @@ background-color: #155797;
 .navbar-fixed-top {
 border-bottom: 5px solid orange;
 }
+/*
 .stats {
 position: absolute;
 top: 75px;
 right: 15px;
 width: 300px;
 }
+*/
 .stats .well {
 background-color: white;
 padding: 8px 0; 
@@ -89,8 +91,6 @@ background-color: #ccc;
 padding-left: 10px;
 border-bottom: 1px solid #eee;
 }
-.stats li.head {
-}
 .stats .nav-list {
 padding: 0px;
 }
@@ -103,9 +103,7 @@ padding: 0px 0px 5px 15px;
 }
 .content-out {
 background-color: white;
-margin-right: 310px;
-}
-.content {
+/*margin-right: 310px;*/
 }
 ul.menu {
 margin-bottom: 10px;
@@ -150,7 +148,7 @@ display: block;
 }
 .stats .stat-value {
 display: inline-block;
-width: 55%;
+width: 45%;
 padding: 2px 10px;
 margin: 1px;
 margin-right: 10px;
@@ -218,127 +216,137 @@ display: block;
 
 <div class="container-fluid">
 
-<div class="content-out well well-small">
+<div class="row-fluid">
+<div class="span9">
 
-<ul class="nav nav-tabs menu">
-  <li class="active"><a id="tab-statusmap" href="#home" data-toggle="tab">Status Map</a></li>
-  <li><a id="tab-job" href="#home" data-toggle="tab">Jobs</a></li>
-  <li><a id="tab-cpu" href="#profile" data-toggle="tab">CPU Hours</a></li>
-  <li><a id="tab-transfer" href="#messages" data-toggle="tab">Transfers</a></li>
-  <li><a id="tab-tb" href="#settings" data-toggle="tab">TB Transferred</a></li>
-</ul>
+    <div class="content-out well well-small">
 
-<div class="stats">
-        <div class="well">
-        <ul class="nav nav-list">
-            <li class="head"><a href="#">In the last 24 Hours</a></li>
-            <li><span class="stat-value"><?php echo format($info["jobs_hourly"]);?></span><span class="stat-label">Jobs</span></li>
-            <li><span class="stat-value"><?php echo format($info["cpu_hours_hourly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfers_hourly"]);?></span><span class="stat-label">Transfers</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_hourly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
-            <li class="head"><a href="#">In the last 30 Days</a></li>
-            <li><span class="stat-value"><?php echo format($info["jobs_daily"]);?></span><span class="stat-label">Jobs</span></li>
-            <li><span class="stat-value"><?php echo format($info["cpu_hours_daily"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfers_daily"]);?></span><span class="stat-label">Transfers</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_daily"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
-            <li class="head"><a href="#">In the last 12 Month</a></li>
-            <li><span class="stat-value"><?php echo format($info["jobs_monthly"]);?></span><span class="stat-label">Jobs</span></li>
-            <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfers_monthly"]);?></span><span class="stat-label">Transfers</span></li>
-            <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_monthly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
+        <ul class="nav nav-tabs menu">
+          <li class="active"><a id="tab-statusmap" href="#home" data-toggle="tab">Status Map</a></li>
+          <li><a id="tab-job" href="#home" data-toggle="tab">Jobs</a></li>
+          <li><a id="tab-cpu" href="#profile" data-toggle="tab">CPU Hours</a></li>
+          <li><a id="tab-transfer" href="#messages" data-toggle="tab">Transfers</a></li>
+          <li><a id="tab-tb" href="#settings" data-toggle="tab">TB Transferred</a></li>
         </ul>
-        </div>
-        <p class="stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
-</div> <!--stats-->
 
-<div class="content">
+        <div class="content">
 
-    <div id="osgCarousel" class="carousel slide">
-        <!--
-        <ol class="carousel-indicators">
-          <li data-target="#osgCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#osgCarousel" data-slide-to="1"></li>
-          <li data-target="#osgCarousel" data-slide-to="2"></li>
-          <li data-target="#osgCarousel" data-slide-to="3"></li>
-        </ol>
-        -->
-        <div class="carousel-inner">
-          <div class="item active" data-tabid="tab-statusmap">
-            <p class="caption">OSG currently consists of <?echo $info["num_sites"];?> sites across United States and abroad.</p>
-            <iframe src="<?php echo config()->rsvmap?>" frameborder="0"></iframe>
-          </div>
+            <div id="osgCarousel" class="carousel slide">
+                <!--
+                <ol class="carousel-indicators">
+                  <li data-target="#osgCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#osgCarousel" data-slide-to="1"></li>
+                  <li data-target="#osgCarousel" data-slide-to="2"></li>
+                  <li data-target="#osgCarousel" data-slide-to="3"></li>
+                </ol>
+                -->
+                <div class="carousel-inner">
+                  <div class="item active" data-tabid="tab-statusmap">
+                    <p class="caption">OSG currently consists of <?echo $info["num_sites"];?> sites across United States and abroad.</p>
+                    <iframe src="<?php echo config()->rsvmap?>" frameborder="0"></iframe>
+                  </div>
 
-          <div class="item" data-tabid="tab-job">
-            <?php render_selector("24h", 1)?>
-            <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
-            <img src="osg_display/jobs_hourly.png"></img>
-          </div>
-          <div class="item" data-tabid="tab-job">
-            <?php render_selector("30d", 1)?>
-            <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
-            <img src="osg_display/jobs_daily.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-job">
-            <?php render_selector("12m", 1)?>
-            <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
-            <img src="osg_display/jobs_monthly.png" alt="">
-          </div>
+                  <div class="item" data-tabid="tab-job">
+                    <?php render_selector("24h", 1)?>
+                    <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
+                    <img src="osg_display/jobs_hourly.png"></img>
+                  </div>
+                  <div class="item" data-tabid="tab-job">
+                    <?php render_selector("30d", 1)?>
+                    <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
+                    <img src="osg_display/jobs_daily.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-job">
+                    <?php render_selector("12m", 1)?>
+                    <p class="caption">Each finished job on an OSG resource is reported to the central accounting system</p>
+                    <img src="osg_display/jobs_monthly.png" alt="">
+                  </div>
 
-          <div class="item" data-tabid="tab-cpu">
-            <?php render_selector("24h", 4)?>
-            <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/cpu_hours_hourly.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-cpu">
-            <?php render_selector("30d", 4)?>
-            <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/cpu_hours_daily.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-cpu">
-            <?php render_selector("12m", 4)?>
-            <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/cpu_hours_monthly.png" alt="">
-          </div>
+                  <div class="item" data-tabid="tab-cpu">
+                    <?php render_selector("24h", 4)?>
+                    <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/cpu_hours_hourly.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-cpu">
+                    <?php render_selector("30d", 4)?>
+                    <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/cpu_hours_daily.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-cpu">
+                    <?php render_selector("12m", 4)?>
+                    <p class="caption">CPU hours spent on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/cpu_hours_monthly.png" alt="">
+                  </div>
 
-          <div class="item" data-tabid="tab-transfer">
-            <?php render_selector("24h", 7)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfers_hourly.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-transfer">
-            <?php render_selector("30d", 7)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfers_daily.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-transfer">
-            <?php render_selector("12m", 7)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfers_monthly.png" alt="">
-          </div>
+                  <div class="item" data-tabid="tab-transfer">
+                    <?php render_selector("24h", 7)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfers_hourly.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-transfer">
+                    <?php render_selector("30d", 7)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfers_daily.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-transfer">
+                    <?php render_selector("12m", 7)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfers_monthly.png" alt="">
+                  </div>
 
-          <div class="item" data-tabid="tab-tb">
-            <?php render_selector("24h", 10)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfer_volume_hourly.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-tb">
-            <?php render_selector("30d", 10)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfer_volume_daily.png" alt="">
-          </div>
-          <div class="item" data-tabid="tab-tb">
-            <?php render_selector("12m", 10)?>
-            <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-            <img src="osg_display/transfer_volume_monthly.png" alt="">
-          </div>
+                  <div class="item" data-tabid="tab-tb">
+                    <?php render_selector("24h", 10)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfer_volume_hourly.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-tb">
+                    <?php render_selector("30d", 10)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfer_volume_daily.png" alt="">
+                  </div>
+                  <div class="item" data-tabid="tab-tb">
+                    <?php render_selector("12m", 10)?>
+                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
+                    <img src="osg_display/transfer_volume_monthly.png" alt="">
+                  </div>
 
-        </div>
-        <a class="left carousel-control" href="#osgCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#osgCarousel" data-slide="next">&rsaquo;</a>
-    </div><!--osgCarousel-->
-</div> <!--content-->
+                </div>
+                <a class="left carousel-control" href="#osgCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="right carousel-control" href="#osgCarousel" data-slide="next">&rsaquo;</a>
+            </div><!--osgCarousel-->
+        </div> <!--content-->
+    
+    </div><!--content well-->
 
-</div><!--content-out-->
+</div><!--span8-->
+<div class="span3">
+
+    <div class="stats">
+            <div class="well">
+            <ul class="nav nav-list">
+                <li class="head"><a href="#">In the last 24 Hours</a></li>
+                <li><span class="stat-value"><?php echo format($info["jobs_hourly"]);?></span><span class="stat-label">Jobs</span></li>
+                <li><span class="stat-value"><?php echo format($info["cpu_hours_hourly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfers_hourly"]);?></span><span class="stat-label">Transfers</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_hourly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
+                <li class="head"><a href="#">In the last 30 Days</a></li>
+                <li><span class="stat-value"><?php echo format($info["jobs_daily"]);?></span><span class="stat-label">Jobs</span></li>
+                <li><span class="stat-value"><?php echo format($info["cpu_hours_daily"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfers_daily"]);?></span><span class="stat-label">Transfers</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_daily"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
+                <li class="head"><a href="#">In the last 12 Month</a></li>
+                <li><span class="stat-value"><?php echo format($info["jobs_monthly"]);?></span><span class="stat-label">Jobs</span></li>
+                <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfers_monthly"]);?></span><span class="stat-label">Transfers</span></li>
+                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_monthly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
+            </ul>
+            </div>
+            <p class="stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
+    </div> <!--stats-->
+
+</div><!--span4-->
+</div><!--row-fluid-->
+
 </div><!--container-fluid-->
 
 <div class="footer">
@@ -417,6 +425,13 @@ function onresize() {
     } else {
         $(".title").show();
     }
+
+    var stats_width = $(".stats").width();
+    var stats_fontsize = 6 + stats_width/30;
+    $(".stats").css("font-size", stats_fontsize);
+    var stats_valuepad = stats_width/100;
+    $(".stat-value").css("padding-top", stats_valuepad);
+    $(".stat-value").css("padding-bottom", stats_valuepad);
 }
 
 function updateTimeago() {
