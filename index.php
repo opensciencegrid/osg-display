@@ -110,7 +110,7 @@ margin-bottom: 10px;
 }
 .container-fluid {
 padding-top: 75px;
-height: 100%;
+/*height: 100%;*/
 box-sizing: border-box;
 padding-bottom: 80px;
 }
@@ -346,7 +346,6 @@ display: block;
 
 </div><!--span4-->
 </div><!--row-fluid-->
-
 </div><!--container-fluid-->
 
 <div class="footer">
