@@ -42,9 +42,6 @@ function render_selector($active, $first_tid) {
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!--
-    <link href="bootstrap-default/css/bootstrap-responsive.min.css" rel="stylesheet">
-    -->
 <style>
 html {
 height: 100%;
