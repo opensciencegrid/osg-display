@@ -23,7 +23,7 @@ function render_selector($active, $first_tid) {
     <ul class="nav nav-pills pull-right time-selector-area">
       <li class="<?php echo $active_24h;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid;?>">24 Hours</a></li>
       <li class="<?php echo $active_30d;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid+1;?>">30 Days</a></li>
-      <li class="<?php echo $active_12m;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid+2;?>">12 Month</a></li>
+      <li class="<?php echo $active_12m;?>"><a href="#" class="time-selector" data-tid="<?php echo $first_tid+2;?>">12 Months</a></li>
     </ul>
     <?php
 }
@@ -331,7 +331,7 @@ display: block;
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_daily"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
                 <li><span class="stat-value"><?php echo format($info["transfers_daily"]);?></span><span class="stat-label">Transfers</span></li>
                 <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_daily"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
-                <li class="head"><a href="#">In the last 12 Month</a></li>
+                <li class="head"><a href="#">In the last 12 Months</a></li>
                 <li><span class="stat-value"><?php echo format($info["jobs_monthly"]);?></span><span class="stat-label">Jobs</span></li>
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
                 <li><span class="stat-value"><?php echo format($info["transfers_monthly"]);?></span><span class="stat-label">Transfers</span></li>
