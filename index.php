@@ -201,7 +201,7 @@ function render_selector($active, $first_tid) {
         <div class="span4">
         <p class="status-at">Status at <time class="timeago" datetime="<?php echo date("cZ", $json_time);?>"><?php echo date("cZ", $json_time);?></time></p>
         <p class="note">
-            Data is loaded every <a href='https://twiki.grid.iu.edu/twiki/pub/Accounting/WebHome/2009_08_20_Gratia_buffering.pdf' target='_blank'>15 minutes</a>
+            Data is loaded every 15 minutes
         </p>
         </div>
         <div class="span4">
