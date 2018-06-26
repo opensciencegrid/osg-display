@@ -88,7 +88,7 @@ function render_selector($active, $first_tid) {
                 <div class="carousel-inner">
                   <div class="item active" data-tabid="tab-statusmap">
                     <p class="caption">OSG currently consists of <?echo $info["num_sites"];?> sites across United States and abroad.</p>
-                    <iframe src="<?php echo config()->rsvmap?>" frameborder="0"></iframe>
+                    <iframe src="<?php echo (new config())->rsvmap?>" frameborder="0"></iframe>
                   </div>
 
                   <div class="item" data-tabid="tab-job">
