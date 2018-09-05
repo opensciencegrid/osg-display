@@ -196,7 +196,6 @@ function render_selector($active, $first_tid) {
 <div class="footer">
     <div class="row-fluid">
         <div class="span4">
-            <a href="http://science.energy.gov/"><img src="doe.png"></a>
         </div>
         <div class="span4">
         <p class="status-at">Status at <time class="timeago" datetime="<?php echo date("cZ", $json_time);?>"><?php echo date("cZ", $json_time);?></time></p>
