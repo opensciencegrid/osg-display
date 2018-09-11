@@ -195,9 +195,7 @@ function render_selector($active, $first_tid) {
 
 <div class="footer">
     <div class="row-fluid">
-        <div class="span4">
-        </div>
-        <div class="span4">
+        <div class="span4 offset4">
         <p class="status-at">Status at <time class="timeago" datetime="<?php echo date("cZ", $json_time);?>"><?php echo date("cZ", $json_time);?></time></p>
         <p class="note">
             Data is loaded every 15 minutes
