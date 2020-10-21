@@ -1,0 +1,17 @@
+version: '3'
+services:
+  osg-display:
+        image: opensciencegrid/osg-display
+        #build: .
+        volumes:
+        - ./site_config.php:/var/www/html/site_config.php
+        - data:/var/www/html/osg_display
+        ports:
+        - '80:80'
+  osg-display-data:
+        image: opensciencegrid/osg-display-data
+        #build: ../osg-display-data/
+        volumes:
+        - data:/var/www/html/osg_display
+volumes:
+     data:
