@@ -70,8 +70,6 @@ function render_selector($active, $first_tid) {
           <li class="active"><a id="tab-statusmap" href="#home" data-toggle="tab">Status Map</a></li>
           <li><a id="tab-job" href="#home" data-toggle="tab">Jobs</a></li>
           <li><a id="tab-cpu" href="#profile" data-toggle="tab">CPU Hours</a></li>
-          <li><a id="tab-transfer" href="#messages" data-toggle="tab">Transfers</a></li>
-          <li><a id="tab-tb" href="#settings" data-toggle="tab">TB Transferred</a></li>
         </ul>
 
         <div class="content">
@@ -123,37 +121,6 @@ function render_selector($active, $first_tid) {
                     <img src="osg_display/cpu_hours_monthly.png" alt="">
                   </div>
 
-                  <div class="item" data-tabid="tab-transfer">
-                    <?php render_selector("24h", 7)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfers_hourly.png" alt="">
-                  </div>
-                  <div class="item" data-tabid="tab-transfer">
-                    <?php render_selector("30d", 7)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfers_daily.png" alt="">
-                  </div>
-                  <div class="item" data-tabid="tab-transfer">
-                    <?php render_selector("12m", 7)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfers_monthly.png" alt="">
-                  </div>
-
-                  <div class="item" data-tabid="tab-tb">
-                    <?php render_selector("24h", 10)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfer_volume_hourly.png" alt="">
-                  </div>
-                  <div class="item" data-tabid="tab-tb">
-                    <?php render_selector("30d", 10)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfer_volume_daily.png" alt="">
-                  </div>
-                  <div class="item" data-tabid="tab-tb">
-                    <?php render_selector("12m", 10)?>
-                    <p class="caption">Completed transfers on an OSG resource are reported to the central accounting system.</p>
-                    <img src="osg_display/transfer_volume_monthly.png" alt="">
-                  </div>
 
                 </div>
                 <a class="left carousel-control" href="#osgCarousel" data-slide="prev">&lsaquo;</a>
@@ -172,18 +139,12 @@ function render_selector($active, $first_tid) {
                 <li class="head"><a href="#">In the last 24 Hours</a></li>
                 <li><span class="stat-value"><?php echo format($info["jobs_hourly"]);?></span><span class="stat-label">Jobs</span></li>
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_hourly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfers_hourly"]);?></span><span class="stat-label">Transfers</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_hourly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
                 <li class="head"><a href="#">In the last 30 Days</a></li>
                 <li><span class="stat-value"><?php echo format($info["jobs_daily"]);?></span><span class="stat-label">Jobs</span></li>
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_daily"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfers_daily"]);?></span><span class="stat-label">Transfers</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_daily"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
                 <li class="head"><a href="#">In the last 12 Months</a></li>
                 <li><span class="stat-value"><?php echo format($info["jobs_monthly"]);?></span><span class="stat-label">Jobs</span></li>
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfers_monthly"]);?></span><span class="stat-label">Transfers</span></li>
-                <li><span class="stat-value"><?php echo format($info["transfer_volume_mb_monthly"]/1000000);?></span><span class="stat-label">TB&nbsp;Transfers</span></li>
             </ul>
             </div>
             <p class="stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
@@ -230,12 +191,6 @@ $(function() {
     })
     $("#tab-cpu").click(function() {
         $(".carousel").carousel(4);
-    })
-    $("#tab-transfer").click(function() {
-        $(".carousel").carousel(7);
-    })
-    $("#tab-tb").click(function() {
-        $(".carousel").carousel(10);
     })
     $(".time-selector").click(function() {
         var tid = $(this).data("tid");
