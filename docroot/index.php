@@ -147,7 +147,7 @@ function render_selector($active, $first_tid) {
                 <li><span class="stat-value"><?php echo format($info["cpu_hours_monthly"]);?></span><span class="stat-label">CPU&nbsp;Hours</span></li>
             </ul>
             </div>
-            <p class="stats-title">OSG delivered across <?php echo $info["num_sites"];?> sites</p>
+            <p class="stats-title">OSG services enabled across <?php echo $info["num_sites"];?> sites</p>
     </div> <!--stats-->
 
 </div><!--span4-->
